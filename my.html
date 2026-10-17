@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photo Table Pixel Art</title>
+<style>
+  body {
+    background-color: #111822;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  /* ドット絵テーブルの設定 */
+  table.pixel-canvas {
+    border-collapse: collapse;
+    empty-cells: show;
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.6);
+  }
+
+  table.pixel-canvas td {
+    width: 14px;
+    height: 14px;
+    padding: 0;
+  }
+
+  /* カラーパレット */
+  .sk { background-color: #69a7e6; } /* 青空 */
+  .tr { background-color: #3b6b27; } /* 背景の深い緑（木々） */
+  .ty { background-color: #6d9c24; } /* 明るい黄緑（木々） */
+  .rf { background-color: #9a4c33; } /* 屋根のレンガ色・茶色 */
+  .bl { background-color: #4a80b8; } /* 青い屋敷の壁色 */
+  .bw { background-color: #dce7f2; } /* 屋敷の窓・白パーツ */
+  .gr { background-color: #557e28; } /* 手前の草地 */
+  .yd { background-color: #cf9c25; } /* 右側の黄色い花 */
+  .sd { background-color: #bfa175; } /* 地面の土・砂利 */
+
+  /* 人物用カラー */
+  .hr { background-color: #1c1a20; } /* 黒髪 */
+  .skn{ background-color: #f7d2b5; } /* 肌色 */
+  .gy { background-color: #6b7077; } /* 左：グレーのトップス */
+  .dk { background-color: #31333a; } /* 左：ダークグレーのパンツ */
+  .pk { background-color: #f5a9b8; } /* 右：大きなピンクリボン */
+  .rd { background-color: #c7202b; } /* 右：赤いドレス */
+  .br { background-color: #7b4226; } /* 右：お団子ヘア（茶髪） */
+  .bk { background-color: #1a1a1a; } /* ブーツ・影 */
+</style>
+</head>
+<body>
+
+<table class="pixel-canvas">
+  <!-- 01-04行目: 青空と遠景の木々・屋根先端 -->
+  <tr><td class="sk"></td><td class="sk"></td><td class="sk"></td><td class="sk"></td><td class="sk"></td><td class="rf"></td><td class="sk"></td><td class="sk"></td><td class="sk"></td><td class="sk"></td><td class="sk"></td><td class="sk"></td><td class="sk"></td><td class="sk"></td><td class="sk"></td><td class="sk"></td><td class="sk"></td><td class="tr"></td><td class="ty"></td><td class="tr"></td><td class="sk"></td><td class="sk"></td><td class="sk"></td><td class="sk"></td></tr>
+  <tr><td class="sk"></td><td class="sk"></td><td class="sk"></td><td class="sk"></td><td class="rf"></td><td class="rf"></td><td class="rf"></td><td class="sk"></td><td class="sk"></td><td class="sk"></td><td class="sk"></td><td class="tr"></td><td class="ty"></td><td class="sk"></td><td class="sk"></td><td class="sk"></td><td class="ty"></td><td class="ty"></td><td class="tr"></td><td class="ty"></td><td class="sk"></td><td class="sk"></td><td class="sk"></td><td class="sk"></td></tr>
+  <tr><td class="sk"></td><td class="sk"></td><td class="sk"></td><td class="rf"></td><td class="rf"></td><td class="rf"></td><td class="rf"></td><td class="rf"></td><td class="sk"></td><td class="sk"></td><td class="tr"></td><td class="tr"></td><td class="ty"></td><td class="tr"></td><td class="sk"></td><td class="ty"></td><td class="ty"></td><td class="ty"></td><td class="tr"></td><td class="ty"></td><td class="ty"></td><td class="sk"></td><td class="sk"></td><td class="sk"></td></tr>
+  <tr><td class="sk"></td><td class="sk"></td><td class="rf"></td><td class="rf"></td><td class="rf"></td><td class="rf"></td><td class="rf"></td><td class="rf"></td><td class="rf"></td><td class="sk"></td><td class="tr"></td><td class="tr"></td><td class="ty"></td><td class="tr"></td><td class="tr"></td><td class="ty"></td><td class="ty"></td><td class="ty"></td><td class="tr"></td><td class="ty"></td><td class="ty"></td><td class="ty"></td><td class="sk"></td><td class="sk"></td></tr>
+
+  <!-- 05-08行目: 屋根の広がりと青い建物上部 -->
+  <tr><td class="sk"></td><td class="rf"></td><td class="rf"></td><td class="rf"></td><td class="rf"></td><td class="rf"></td><td class="rf"></td><td class="rf"></td><td class="rf"></td><td class="rf"></td><td class="tr"></td><td class="tr"></td><td class="tr"></td><td class="tr"></td><td class="tr"></td><td class="tr"></td><td class="ty"></td><td class="ty"></td><td class="tr"></td><td class="ty"></td><td class="ty"></td><td class="tr"></td><td class="tr"></td><td class="sk"></td></tr>
+  <tr><td class="tr"></td><td class="bl"></td><td class="bl"></td><td class="bw"></td><td class="bl"></td><td class="bl"></td><td class="bl"></td><td class="bl"></td><td class="bl"></td><td class="tr"></td><td class="tr"></td><td class="tr"></td><td class="tr"></td><td class="tr"></td><td class="tr"></td><td class="ty"></td><td class="ty"></td><td class="tr"></td><td class="tr"></td><td class="bk"></td><td class="ty"></td><td class="tr"></td><td class="tr"></td><td class="tr"></td></tr>
+  <tr><td class="tr"></td><td class="bl"></td><td class="bl"></td><td class="bl"></td><td class="bl"></td><td class="bl"></td><td class="bw"></td><td class="bw"></td><td class="bl"></td><td class="tr"></td><td class="tr"></td><td class="tr"></td><td class="tr"></td><td class="tr"></td><td class="ty"></td><td class="ty"></td><td class="tr"></td><td class="tr"></td><td class="bk"></td><td class="bk"></td><td class="bk"></td><td class="tr"></td><td class="tr"></td><td class="tr"></td></tr>
+  <tr><td class="tr"></td><td class="bl"></td><td class="bl"></td><td class="bw"></td><td class="bw"></td><td class="bl"></td><td class="bl"></td><td class="bl"></td><td class="bl"></td><td class="tr"></td><td class="
