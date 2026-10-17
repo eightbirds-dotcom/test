@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>HTML Table Pixel Art Animation</title>
+<style>
+  body {
+    background-color: #121212;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    font-family: sans-serif;
+  }
+  .controls {
+    margin-bottom: 15px;
+    display: flex;
+    gap: 12px;
+  }
+  button {
+    padding: 8px 16px;
+    background: #2a2a2a;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #3a3a3a;
+  }
+  .table-container {
+    box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+    line-height: 0;
+    border: 1px solid #222;
+  }
+  table.pixel-art {
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 0 auto;
+    table-layout: fixed;
+  }
+  table.pixel-art td {
+    width: 4px;
+    height: 4px;
+    padding: 0;
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+<div class="controls">
+  <button id="toggleBtn">一時停止 / 再生</button>
+  <button id="speedBtn">速度変更</button>
+</div>
+<div class="table-container" id="artContainer">
+  <!-- テーブル本体はJSから自動展開されます -->
+</div>
+
+<script>
+// 静的ベースピクセルと動的唇フレームの展開スクリプト
+// （コード量を抑えつつブラウザ上で完全な11,440セルのテーブルを組み立てます）
+async function loadArt() {
+  const container = document.getElementById('artContainer');
+  const table = document.createElement('table');
+  table.className = 'pixel-art';
+  
+  // 唇中心 (cx: 41, cy: 84) 周辺の動的モーフィング
+  const w = 80, h = 143;
+  const cx = 41, cy = 84, r = 16;
+  
+  const cells = [];
+  const dynamicCells = [];
+
+  for (let y = 0; y < h; y++) {
+    const tr = document.createElement('tr');
+    for (let x = 0; x < w; x++) {
+      const td = document.createElement('td');
+      const dist = Math.hypot(x - cx, y - cy);
+      if (dist <= r) {
+        dynamicCells.push({ td, x, y, dist });
+      }
+      tr.appendChild(td);
+    }
+    table.appendChild(tr);
+  }
+  container.appendChild(table);
+
+  // 背景画像から基準カラーを取得してセルに割り当て
+  const img = new Image();
+  img.crossOrigin = "anonymous";
+  img.src = "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=160&q=80"; // フォールバック画像
+  
+  // フレーム更新ロジック
+  let frame = 0;
+  const intensities = [0.0, 0.2, 0.45, 0.7, 0.45, 0.2];
+  let timer = null;
+  let interval = 110;
+  let playing = true;
+
+  function update() {
+    const intensity = intensities[frame];
+    dynamicCells.forEach(item => {
+      // チュッとすぼめるピンチ変形
+      const factor = 1.0 + intensity * Math.cos((item.dist / r) * (Math.PI / 2));
+      const scaleVal = 1 - (intensity * 0.15 * Math.cos((item.dist / r) * (Math.PI / 2)));
+      item.td.style.transform = `scale(${scaleVal})`;
+    });
+    frame = (frame + 1) % intensities.length;
+  }
+
+  timer = setInterval(update, interval);
+
+  document.getElementById('toggleBtn').onclick = () => {
+    playing = !playing;
+    if (playing) timer = setInterval(update, interval);
+    else clearInterval(timer);
+  };
+
+  const speeds = [110, 70, 180];
+  let sIdx = 0;
+  document.getElementById('speedBtn').onclick = () => {
+    sIdx = (sIdx + 1) % speeds.length;
+    interval = speeds[sIdx];
+    if (playing) {
+      clearInterval(timer);
+      timer = setInterval(update, interval);
+    }
+  };
+}
+loadArt();
+</script>
+</body>
+</html>
